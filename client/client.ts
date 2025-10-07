@@ -10,12 +10,19 @@ const trpcConnection = createTRPCProxyClient<AppRouter>({
 })
 
 async function main(){
-    let response = await trpcConnection.createTodo.mutate({
+    let createTodo = await trpcConnection.createTodo.mutate({
         title : "please go to gym today",
         description : "Today is Sunday and every Sunday you have to go gym",
         done : true
     })
-    console.log(response)
+
+    let signIn = await trpcConnection.signIn.mutate({
+        email : "nobitakaif@gmail.com",
+        password : "nobitakaif"
+    })
+    
+    console.log(signIn)
+    console.log(createTodo)
 }
 
 main()
