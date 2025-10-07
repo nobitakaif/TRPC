@@ -1,8 +1,13 @@
 import { publicProcedure, router } from "./trpc";
 import { z } from "zod"
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import cors from "cors"
 
 const appRouter = router({
+    sayHi : publicProcedure.query(async ()=>{
+        return "Hii from TRPC server"
+    }),
+
     createTodo : publicProcedure.input(z.object({
         title : z.string(),
         description : z.string(),
@@ -33,15 +38,17 @@ const appRouter = router({
         return {
             token
         }
-    })
+    }),
+  
 })
 
 // under the hood it is still using http/express call but think as a TRPC
 const server = createHTTPServer({
     router : appRouter,
+    middleware : cors(),
     createContext(opts){ // defining context  
         let authHeader = opts.req.headers["authorization"] 
-
+        
         // verify jwt token if token is valid then reutrn otherwise user is invalid 
         
         return {
