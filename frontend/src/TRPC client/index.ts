@@ -25,3 +25,7 @@ export async function sayHi(){
     let response = await trpcConnection.sayHi.query()
     return response
 }
+
+export async function createTodo  (){
+    let repsone = await trpcConnection.createTodo.createTodo.mutate
+}

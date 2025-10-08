@@ -2,28 +2,14 @@ import { publicProcedure, router } from "./trpc";
 import { z } from "zod"
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors"
+import { userRoute } from "./routers/createTodo";
 
 const appRouter = router({
     sayHi : publicProcedure.query(async ()=>{
         return "Hii from TRPC server"
     }),
 
-    createTodo : publicProcedure.input(z.object({
-        title : z.string(),
-        description : z.string(),
-        done : z.boolean()
-    })).mutation( async (opts)=>{ // for update date user mutaion or for get the data use query 
-        const title = opts.input.title // data the body similar as req obj
-        const description = opts.input.description
-        const done = opts.input.done
-        let username = opts.ctx.username
-        console.log(username) // now we can use context  
-        // do db stuff,  put data inside db  
-
-        return {
-            id : "1",
-        }
-    }),
+    createTodo :userRoute,
 
     signIn : publicProcedure.input(z.object({
         email : z.email({message : "email format is invalid"}),
@@ -43,7 +29,7 @@ const appRouter = router({
 })
 
 // under the hood it is still using http/express call but think as a TRPC
-const server = createHTTPServer({
+const server = createHTTPServer({//this is based on where you're deploying on the which server for express is diff for next diff..
     router : appRouter,
     middleware : cors(),
     createContext(opts){ // defining context  
