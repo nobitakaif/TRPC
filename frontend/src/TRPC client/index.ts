@@ -27,5 +27,10 @@ export async function sayHi(){
 }
 
 export async function createTodo  (){
-    let repsone = await trpcConnection.createTodo.createTodo.mutate
+    let repsone = await trpcConnection.createTodo.createTodo.mutate({
+        description : "",
+        title : "",
+        done : false
+    })
+    return repsone
 }
