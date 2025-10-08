@@ -6,11 +6,14 @@ import { Input } from './components/ui/input'
 
 
 function App() {
-  const [user,setUser] = useState<string | undefined>()
+  const [user,setUser] = useState<object | undefined>()
   const [call, setCall] = useState<string | undefined>()
 
   async function submitButton(){
-   
+    let response = await signIn({email: "nobitkaif@gmail.com", password : "nobitakaif"})
+    setUser(response)
+    let hicall = await sayHi()
+    setCall(hicall)
   }
   
   return (
@@ -19,7 +22,7 @@ function App() {
         <Input  placeholder='email '/>
         <Input  placeholder='password'/>
         <Button onClick={submitButton}>Sign in</Button>
-        <h1>{user} </h1>
+        <h1>{JSON.stringify(user)} </h1>
         {user && call}
       </div>
     </>

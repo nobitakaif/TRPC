@@ -4,6 +4,13 @@ import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors"
 import { userRoute } from "./routers/createTodo";
 import { UserSignIn } from "./routers/user";
+import { MongoClient } from "mongodb";
+
+MongoClient.connect("mongodb://admin:password@localhost:27017").then(e =>{
+    console.log("sucessfull connected")
+}).catch(e =>{
+    console.log("error while connecting",e)
+})
 
 const appRouter = router({
     sayHi : publicProcedure.query(async ()=>{

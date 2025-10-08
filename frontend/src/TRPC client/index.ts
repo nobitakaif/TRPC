@@ -14,7 +14,7 @@ interface UserSignIn{
 }
 
 export async function signIn({email , password }:UserSignIn){
-    let response = await  trpcConnection.signIn.mutate({
+    let response = await  trpcConnection.user.signUp.mutate({
         email : email,
         password : password
     })
