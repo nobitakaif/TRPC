@@ -10,10 +10,7 @@ function App() {
   const [call, setCall] = useState<string | undefined>()
 
   async function submitButton(){
-    let response = await signIn({email: "nobitkaif@gmail.com", password : "nobitakaif"})
-    setUser(response.token)
-    let hicall = await sayHi()
-    setCall(hicall)
+   
   }
   
   return (

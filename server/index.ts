@@ -3,6 +3,7 @@ import { z } from "zod"
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import cors from "cors"
 import { userRoute } from "./routers/createTodo";
+import { UserSignIn } from "./routers/user";
 
 const appRouter = router({
     sayHi : publicProcedure.query(async ()=>{
@@ -11,20 +12,7 @@ const appRouter = router({
 
     createTodo :userRoute,
 
-    signIn : publicProcedure.input(z.object({
-        email : z.email({message : "email format is invalid"}),
-        password : z.string()
-    })).mutation(async (opts)=>{
-        const email = opts.input.email
-        const password = opts.input.password
-
-        // do database call here check use is already exist or not 
-        // generate token
-        const token = "1111122223333"
-        return {
-            token
-        }
-    }),
+    user : UserSignIn
   
 })
 
