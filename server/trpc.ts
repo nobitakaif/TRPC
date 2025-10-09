@@ -1,11 +1,13 @@
 import { initTRPC } from '@trpc/server';
+import type { TodoModel, UserModel } from './db/schema';
  
 /**
  * Initialization of tRPC backend
  * Should be done only once per backend!
  */
 const t = initTRPC.context<{
-    username? : string
+    db:{Todo : typeof TodoModel, User : typeof UserModel},
+    userId ?: string
 }>().create();
  
 /**

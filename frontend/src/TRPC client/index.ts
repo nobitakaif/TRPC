@@ -13,11 +13,21 @@ interface UserSignIn{
     password : string
 }
 
-export async function signIn({email , password }:UserSignIn){
+export async function signUp({email , password }:UserSignIn){
     let response = await  trpcConnection.user.signUp.mutate({
         email : email,
         password : password
     })
+    console.log(response.token)
+    return response
+}
+
+export async function signIn({email , password }:UserSignIn){
+    let response = await  trpcConnection.user.signIn.mutate({
+        email : email,
+        password : password
+    })
+    console.log(response.token)
     return response
 }
 

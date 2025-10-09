@@ -10,8 +10,8 @@ export const userRoute = router({
             const title = opts.input.title // data the body similar as req obj
             const description = opts.input.description
             const done = opts.input.done
-            let username = opts.ctx.username
-            console.log(username) // now we can use context  
+            // let username = opts.ctx.username
+            // console.log(username) // now we can use context  
             // do db stuff,  put data inside db  
     
             return {
